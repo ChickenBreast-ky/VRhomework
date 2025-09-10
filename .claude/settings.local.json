@@ -1,0 +1,16 @@
+{
+  "enabledMcpjsonServers": [
+    "server-sequential-thinking",
+    "context7-mcp",
+    "playwright-mcp",
+    "supabase-mcp",
+    "notion",
+    "github",
+    "exa"
+  ],
+  "permissions": {
+    "allow": [
+      "mcp__github__create_repository"
+    ]
+  }
+}

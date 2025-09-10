@@ -1,0 +1,92 @@
+{
+    "mcpServers": {
+      "server-sequential-thinking": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "@smithery/cli@latest",
+          "run",
+          "@smithery-ai/server-sequential-thinking",
+          "--key",
+          "c21b836f-9c9e-49b8-a709-6787d51746f7",
+          "--profile",
+          "cooperative-spider-J42wUs"
+        ]
+      },
+      "context7-mcp": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "@smithery/cli@latest",
+          "run",
+          "@upstash/context7-mcp",
+          "--key",
+          "c21b836f-9c9e-49b8-a709-6787d51746f7"
+        ]
+      },
+      "playwright-mcp": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "@smithery/cli@latest",
+          "run",
+          "@microsoft/playwright-mcp",
+          "--key",
+          "c21b836f-9c9e-49b8-a709-6787d51746f7"
+        ]
+      },
+      "supabase-mcp": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "@smithery/cli@latest",
+          "run",
+          "@supabase-community/supabase-mcp",
+          "--key",
+          "c21b836f-9c9e-49b8-a709-6787d51746f7",
+          "--profile",
+          "cooperative-spider-J42wUs"
+        ]
+      },
+      "notion": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "@smithery/cli@latest",
+          "run",
+          "@smithery/notion",
+          "--key",
+          "c21b836f-9c9e-49b8-a709-6787d51746f7",
+          "--profile",
+          "cooperative-spider-J42wUs"
+        ]
+      },
+      "github": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "@smithery/cli@latest",
+          "run",
+          "@smithery-ai/github",
+          "--key",
+          "c21b836f-9c9e-49b8-a709-6787d51746f7",
+          "--profile",
+          "cooperative-spider-J42wUs"
+        ]
+      },
+      "exa": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "@smithery/cli@latest",
+          "run",
+          "exa",
+          "--key",
+          "c21b836f-9c9e-49b8-a709-6787d51746f7",
+          "--profile",
+          "cooperative-spider-J42wUs"
+        ]
+      }
+    }
+  }
+  

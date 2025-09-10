@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osso VR 대화형 리포트</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutral Professional Palette -->
+    <!-- Application Structure Plan: The application uses a thematic, single-page scrolling structure with a sticky top navigation for easy access to key sections: Introduction, Features, Effectiveness, Challenges, and Conclusion. This non-linear structure is chosen over the original linear slide format to allow users to explore topics of interest at their own pace. Key interactions include interactive tabs for the 'Features' section to make the information digestible, and a dynamic bar chart in the 'Effectiveness' section to visually emphasize the platform's impact, which is more engaging than static text. -->
+    <!-- Visualization & Content Choices: 
+    - Report Info: Osso VR's core features (Tech, Gamification, Analytics). Goal: Organize & Explain. Viz/Method: Interactive Tabs (HTML/CSS/JS). Interaction: Click to reveal content. Justification: Prevents overwhelming users with text, encourages active exploration.
+    - Report Info: UCLA (230%) & Illinois Uni. (300%) performance improvements. Goal: Compare & Highlight. Viz/Method: Vertical Bar Chart. Interaction: Hover for tooltips showing exact percentages. Justification: Visually powerful representation of key performance data, making the impact immediate and clear. Library: Chart.js (Canvas).
+    - Report Info: Limitations and Challenges. Goal: Organize & Inform. Viz/Method: Grid of styled cards. Interaction: Subtle hover effects. Justification: Breaks down complex points into easily scannable, visually separated items.
+    - CONFIRMATION: NO SVG/Mermaid used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .tab-button.active {
+            border-color: #3b82f6;
+            background-color: #3b82f6;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="text-xl font-bold text-gray-800">Osso VR</div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#about" class="text-gray-600 hover:text-blue-500 transition-colors">소개</a>
+                <a href="#features" class="text-gray-600 hover:text-blue-500 transition-colors">핵심 특징</a>
+                <a href="#effectiveness" class="text-gray-600 hover:text-blue-500 transition-colors">성과</a>
+                <a href="#challenges" class="text-gray-600 hover:text-blue-500 transition-colors">한계점</a>
+                <a href="#conclusion" class="text-gray-600 hover:text-blue-500 transition-colors">결론</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="bg-slate-100 py-20 md:py-32">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4">가상현실(VR) 외과 수술 훈련의 미래</h1>
+                <p class="text-lg md:text-xl text-gray-600">Osso VR: 외과 훈련의 혁신을 이끄는 플랫폼을 탐색해보세요.</p>
+                <p class="text-lg md:text-xl text-gray-600">-201210216 휴먼ICT 장기영-</p>
+            </div>
+        </section>
+
+        <section id="about" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-4">Osso VR이란?</h2>
+                <p class="max-w-3xl mx-auto text-center text-gray-600 mb-12">
+                    Osso VR은 외과 수술 훈련을 위해 특별히 개발된 선도적인 가상현실(VR) 플랫폼입니다. 이 섹션에서는 Osso VR의 기본 정의, 설립 배경, 그리고 궁극적인 목표에 대해 알아봅니다.
+                </p>
+                <div class="flex flex-wrap -mx-4">
+                    <div class="w-full md:w-1/2 px-4 mb-8 md:mb-0">
+                        <div class="bg-slate-50 p-8 rounded-lg shadow-lg h-full">
+                            <h3 class="text-2xl font-bold mb-4">설립 배경</h3>
+                            <p class="text-gray-700 mb-4">정형외과 의사이자 비디오 게임 개발 경험이 있는 <strong class="text-blue-600">저스틴 바래드(Justin Barad)</strong>가 설립했습니다.</p>
+                            <p class="text-gray-700">의료 전문성과 기술적 통찰력의 결합을 통해 외과 의사들이 더 안전하고 효율적으로 훈련할 수 있는 환경을 만들고자 했습니다.</p>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 px-4">
+                        <div class="bg-slate-50 p-8 rounded-lg shadow-lg h-full">
+                            <h3 class="text-2xl font-bold mb-4">핵심 목표</h3>
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 mr-3 mt-1">➔</span>
+                                    <span class="text-gray-700"><strong>환자 치료 결과 개선:</strong> 정교한 훈련을 통해 수술의 정확성과 안전성을 높여 궁극적으로 환자에게 더 나은 치료 결과를 제공합니다.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 mr-3 mt-1">➔</span>
+                                    <span class="text-gray-700"><strong>최신 수술 기법 접근성 확대:</strong> 전 세계 의료진이 시공간의 제약 없이 최신 수술 기술과 기법을 습득할 수 있도록 지원합니다.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="py-16 md:py-24 bg-slate-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-4">핵심 기술 및 특징</h2>
+                 <p class="max-w-3xl mx-auto text-center text-gray-600 mb-12">
+                    Osso VR은 최첨단 기술과 혁신적인 아이디어를 결합하여 외과 훈련의 패러다임을 바꾸고 있습니다. 여기서는 Osso VR을 구성하는 세 가지 핵심 요소를 탭을 통해 대화형으로 탐색할 수 있습니다. 각 탭을 클릭하여 기술 기반, 게이미피케이션, 객관적 평가 시스템에 대해 자세히 알아보세요.
+                </p>
+                <div class="max-w-4xl mx-auto">
+                    <div class="flex justify-center border-b mb-8">
+                        <button data-tab="tech" class="tab-button active text-lg font-semibold py-3 px-6 border-b-2 transition-colors">기술 기반</button>
+                        <button data-tab="gamification" class="tab-button text-lg font-semibold py-3 px-6 border-b-2 border-transparent text-gray-500 hover:text-blue-500 transition-colors">게이미피케이션</button>
+                        <button data-tab="analytics" class="tab-button text-lg font-semibold py-3 px-6 border-b-2 border-transparent text-gray-500 hover:text-blue-500 transition-colors">객관적 평가</button>
+                    </div>
+                    <div id="tab-content" class="bg-white p-8 rounded-lg shadow-inner">
+                        <div id="tech" class="tab-panel">
+                            <h3 class="text-2xl font-bold mb-4">사실적인 가상 환경</h3>
+                            <p class="text-gray-700 mb-2"><strong class="text-gray-800">엔진:</strong> 유니티(Unity) 게임 엔진을 기반으로 구축되어, 사실적이고 몰입감 높은 3D 그래픽을 구현합니다.</p>
+                            <p class="text-gray-700"><strong class="text-gray-800">기기:</strong> 메타 퀘스트 2와 같은 독립형 VR 헤드셋에서 구동되어, 복잡한 외부 장비 없이도 언제 어디서든 훈련이 가능합니다.</p>
+                        </div>
+                        <div id="gamification" class="tab-panel hidden">
+                            <h3 class="text-2xl font-bold mb-4">게임처럼 즐기는 훈련</h3>
+                            <p class="text-gray-700 mb-2">훈련 과정에 비디오 게임의 원리를 접목하여 훈련생의 동기를 부여하고 학습 효과를 극대화합니다.</p>
+                            <ul class="list-disc list-inside text-gray-700 space-y-2 mt-4">
+                                <li><strong>객관적인 점수 시스템:</strong> 각 단계별 수행 능력을 점수로 환산하여 성취감을 제공합니다.</li>
+                                <li><strong>성과 지표 제공:</strong> 정확도, 속도 등 구체적인 지표를 통해 자신의 강점과 약점을 파악할 수 있습니다.</li>
+                                <li><strong>동료와의 비교:</strong> 익명화된 데이터를 통해 동료와 성과를 비교하며 선의의 경쟁을 유도합니다.</li>
+                            </ul>
+                        </div>
+                        <div id="analytics" class="tab-panel hidden">
+                            <h3 class="text-2xl font-bold mb-4">데이터 기반 피드백: Osso Analytics</h3>
+                            <p class="text-gray-700">'오쏘 애널리틱스'라는 데이터 플랫폼을 통해 훈련 과정을 정량적으로 분석하고 객관적인 피드백을 제공합니다.</p>
+                            <ul class="list-disc list-inside text-gray-700 space-y-2 mt-4">
+                                <li><strong>수술 시간:</strong> 절차를 완료하는 데 걸리는 시간을 측정하여 효율성을 평가합니다.</li>
+                                <li><strong>정확도:</strong> 수술 기구 사용의 정확도를 분석하여 실수를 줄이도록 돕습니다.</li>
+                                <li><strong>힌트 사용 횟수:</strong> 훈련 중 힌트를 얼마나 사용했는지 추적하여 절차에 대한 이해도를 평가합니다.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="effectiveness" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-4">입증된 훈련 성과</h2>
+                 <p class="max-w-3xl mx-auto text-center text-gray-600 mb-12">
+                    Osso VR의 효과는 단순한 주장에 그치지 않습니다. 다수의 동료 심사를 거친 연구를 통해 그 성과가 객관적으로 입증되었습니다. 아래 차트는 Osso VR을 통한 훈련이 전통적인 방식에 비해 얼마나 뛰어난 향상을 보이는지 시각적으로 보여줍니다. 차트에 마우스를 올려 각 연구의 구체적인 수치를 확인해보세요.
+                </p>
+                <div class="chart-container">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+                <div class="mt-12 text-center">
+                    <h3 class="text-2xl font-bold mb-6">주요 파트너 및 사용 기관</h3>
+                    <p class="text-gray-600 mb-8">이러한 성과를 바탕으로 유수의 글로벌 의료기기 회사와 저명한 의료 기관에서 Osso VR을 활발하게 도입하여 사용하고 있습니다.</p>
+                    <div class="flex justify-center items-center space-x-8 sm:space-x-12 grayscale">
+                        <span class="text-2xl sm:text-3xl font-semibold text-gray-500">Johnson & Johnson</span>
+                        <span class="text-2xl sm:text-3xl font-semibold text-gray-500">Stryker</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="challenges" class="py-16 md:py-24 bg-slate-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-4">주요 한계점 및 과제</h2>
+                <p class="max-w-3xl mx-auto text-center text-gray-600 mb-12">
+                   혁신적인 기술인 Osso VR 역시 아직 해결해야 할 과제들을 안고 있습니다. 기술의 완벽한 구현, 경제적 접근성, 그리고 임상적 검증 등 다방면에 걸친 한계점들을 이해하는 것은 플랫폼의 현재 위치와 미래 가능성을 정확히 파악하는 데 중요합니다.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                        <h3 class="text-xl font-bold mb-3">촉각 피드백의 부재</h3>
+                        <p class="text-gray-700">뼈를 뚫거나 조직을 봉합할 때의 미세한 저항감과 같은 촉각(햅틱) 피드백을 현실적으로 재현하는 데 한계가 있습니다. 이로 인해 실제 수술 훈련을 완전히 대체하기보다는 보완하는 역할에 머무릅니다.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                        <h3 class="text-xl font-bold mb-3">경제적 장벽</h3>
+                        <p class="text-gray-700">VR 헤드셋 자체는 비교적 저렴하지만, 소프트웨어 라이선스 및 유지보수를 포함한 총소유비용(TCO)이 높아 자금력이 부족한 기관에는 도입 장벽이 될 수 있습니다.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                        <h3 class="text-xl font-bold mb-3">최종 검증의 과제</h3>
+                        <p class="text-gray-700">VR 시뮬레이션에서의 성과가 실제 수술실에서 환자의 치료 결과 개선으로 직접 이어진다는 장기적인 연구 데이터는 아직 충분하지 않습니다.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                        <h3 class="text-xl font-bold mb-3">기타 문제</h3>
+                        <p class="text-gray-700">장시간 사용 시 일부 사용자에게 모션 시크니스(멀미)를 유발할 수 있으며, 보수적인 기존 의학 교육 과정에 새로운 기술을 통합하는 데 어려움이 따릅니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="conclusion" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6 max-w-4xl text-center">
+                 <h2 class="text-3xl font-bold text-center mb-4">결론 및 미래 전망</h2>
+                 <p class="text-gray-600 mb-12">
+                    Osso VR은 외과 훈련 분야에서 명백한 강점과 잠재력을 보여주었지만, 동시에 현실적인 한계도 가지고 있습니다. 이 섹션은 플랫폼의 강점과 약점을 종합하고, 앞으로 나아갈 길에 대한 전망을 제시하며 마무리합니다.
+                </p>
+                <div class="bg-slate-100 p-8 rounded-lg shadow-lg text-left">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-xl font-bold text-green-600 mb-3">강점</h4>
+                            <ul class="space-y-2 text-gray-700">
+                                <li>✓ 높은 몰입감과 현실적인 환경</li>
+                                <li>✓ 객관적이고 정량적인 성과 평가</li>
+                                <li>✓ 연구로 입증된 뛰어난 훈련 효과</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-red-600 mb-3">한계</h4>
+                            <ul class="space-y-2 text-gray-700">
+                                <li>✗ 촉각 피드백 부재</li>
+                                <li>✗ 높은 총소유비용(TCO)</li>
+                                <li>✗ 장기적 임상 데이터 부족</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr class="my-6 border-gray-300">
+                    <div>
+                        <h4 class="text-xl font-bold text-blue-600 mb-3">미래 전망</h4>
+                        <p class="text-gray-700">기술적 한계, 특히 햅틱 기술의 발전을 통해 단점을 극복하고, 교육 시스템에 성공적으로 안착한다면 미래 외과 훈련의 표준을 바꿀 강력한 잠재력을 보유하고 있습니다. 지속적인 연구와 임상 데이터 확보가 성공의 열쇠가 될 것입니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Osso VR Interactive Report. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const panels = document.querySelectorAll('.tab-panel');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    const target = tab.getAttribute('data-tab');
+
+                    panels.forEach(panel => {
+                        if (panel.id === target) {
+                            panel.classList.remove('hidden');
+                        } else {
+                            panel.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['UCLA 연구 (수술 수행 능력 향상)', '일리노이 대학교 연구 (시술 완성도 향상)'],
+                    datasets: [{
+                        label: '전통 방식 대비 향상률 (%)',
+                        data: [230, 300],
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.6)',
+                            'rgba(34, 197, 94, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(34, 197, 94, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '향상률 (%)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += context.parsed.y + '%';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
